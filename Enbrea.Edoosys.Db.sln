@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8DAB1221-B8BE-4B81-A6B6-9EC966A25006}") = "Enbrea.Edoosys.Db", "src\Enbrea.Edoosys.Db.csproj", "{76851181-238D-46A4-A720-754453EF72DC}"
+EndProject
+Project("{316CA033-F949-4D16-B143-22EAACFDE46E}") = "Enbrea.Edoosys.Db.SmokeTest", "test\SmokeTest\Enbrea.Edoosys.Db.SmokeTest.csproj", "{F63C3664-240B-4EE2-9FB3-0B58BA5AFDDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76851181-238D-46A4-A720-754453EF72DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76851181-238D-46A4-A720-754453EF72DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76851181-238D-46A4-A720-754453EF72DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76851181-238D-46A4-A720-754453EF72DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63C3664-240B-4EE2-9FB3-0B58BA5AFDDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63C3664-240B-4EE2-9FB3-0B58BA5AFDDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63C3664-240B-4EE2-9FB3-0B58BA5AFDDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63C3664-240B-4EE2-9FB3-0B58BA5AFDDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12333456-B93C-41F5-8372-E8A518027360}
+	EndGlobalSection
+EndGlobal
