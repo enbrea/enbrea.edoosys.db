@@ -1,8 +1,8 @@
-﻿#region ENBREA - Copyright (C) 2020 STÜBER SYSTEMS GmbH
+﻿#region ENBREA - Copyright (C) 2021 STÜBER SYSTEMS GmbH
 /*    
  *    ENBREA
  *    
- *    Copyright (C) 2020 STÜBER SYSTEMS GmbH
+ *    Copyright (C) 2021 STÜBER SYSTEMS GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU Affero General Public License, version 3,
@@ -157,7 +157,7 @@ namespace Enbrea.Edoosys.Db.SmokeTest
             Console.WriteLine("---------");
 
             var count = 0;
-            await foreach (var student in dbReader.StudentsAsync(_appConfig.SchoolNo, _appConfig.SchoolYearCode))
+            await foreach (var student in dbReader.StudentsAsync(_appConfig.SchoolNo, _appConfig.SchoolYearCode, true))
             {
                 Console.WriteLine(@"{0}, {1}, {2}, {3}",
                     student.Lastname,
@@ -179,7 +179,7 @@ namespace Enbrea.Edoosys.Db.SmokeTest
             Console.WriteLine("---------------------------------");
 
             var count = 0;
-            await foreach (var attendance in dbReader.StudentSchoolClassAttendancesAsync(_appConfig.SchoolNo, _appConfig.SchoolYearCode))
+            await foreach (var attendance in dbReader.StudentSchoolClassAttendancesAsync(_appConfig.SchoolNo, _appConfig.SchoolYearCode, true))
             {
                 Console.WriteLine(@"{0}, {1}, {2}",
                     attendance.StudentId,
@@ -200,7 +200,7 @@ namespace Enbrea.Edoosys.Db.SmokeTest
             Console.WriteLine("-----------------");
 
             var count = 0;
-            await foreach (var studentSubject in dbReader.StudentSubjectsAsync(_appConfig.SchoolNo, _appConfig.SchoolYearCode))
+            await foreach (var studentSubject in dbReader.StudentSubjectsAsync(_appConfig.SchoolNo, _appConfig.SchoolYearCode, true))
             {
                 Console.WriteLine(@"{0}, {1}, {2}, {3}, {4}",
                     studentSubject.StudentId,

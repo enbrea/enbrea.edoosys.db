@@ -1,8 +1,8 @@
-﻿#region ENBREA - Copyright (C) 2020 STÜBER SYSTEMS GmbH
+﻿#region ENBREA - Copyright (C) 2021 STÜBER SYSTEMS GmbH
 /*    
  *    ENBREA
  *    
- *    Copyright (C) 2020 STÜBER SYSTEMS GmbH
+ *    Copyright (C) 2021 STÜBER SYSTEMS GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU Affero General Public License, version 3,
@@ -19,14 +19,13 @@
  */
 #endregion
 
-
 using System;
 using System.Data.Common;
 
 namespace Enbrea.Edoosys.Db
 {
     /// <summary>
-    /// An entity within the edoo.sys database table "asv.svp_lehrer_stamm"
+    /// An entity within the edoo.sys database table "asv.svp_lehrer_stamm" (+joined tables)
     /// </summary>
     public class Teacher
     {
@@ -36,9 +35,12 @@ namespace Enbrea.Edoosys.Db
         public Gender? Gender { get; set; }
         public string Id { get; set; }
         public string Lastname { get; set; }
+        public DateTime? LeaveDate { get; set; }
         public string NamePostfix { get; set; }
         public string NamePrefix { get; set; }
         public string Nickname { get; set; }
+        public DateTime? StartDate { get; set; }
+        public string TeacherType { get; set; }
 
         public static Teacher FromDb(DbDataReader reader)
         {
@@ -49,10 +51,13 @@ namespace Enbrea.Edoosys.Db
                 Lastname = reader.GetValue<string>("familienname"),
                 Firstname = reader.GetValue<string>("vornamen"),
                 Birthdate = reader.GetValue<DateTime?>("geburtsdatum"),
-                Gender = reader.GetGenderValue("geschlecht"),
                 Nickname = reader.GetValue<string>("rufname"),
                 NamePrefix = reader.GetValue<string>("namensbestandteil_vorangest"),
-                NamePostfix = reader.GetValue<string>("namensbestandteil_nachgest")
+                NamePostfix = reader.GetValue<string>("namensbestandteil_nachgest"),
+                Gender = reader.GetGenderValue("geschlecht"),
+                TeacherType = reader.GetValue<string>("lehrerart"),
+                StartDate = reader.GetValue<DateTime?>("zugang_datum"),
+                LeaveDate = reader.GetValue<DateTime?>("abgang_datum")
             };
         }
     }
