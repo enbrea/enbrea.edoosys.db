@@ -185,7 +185,7 @@ namespace Enbrea.Edoosys.Db
             void SetQuery(DbCommand dbCommand)
             {
                 dbCommand.CommandText =
-                    $"select " +
+                    $"select distinct" +
                     $"  svp_schueler_stamm.id as schueler_id, " +
                     $"  svp_schueler_schuljahr.klassengruppe_id as klassengruppe_id, " +
                     $"  svp_klassengruppe.klasse_id " +
@@ -231,7 +231,7 @@ namespace Enbrea.Edoosys.Db
             void SetQuery(DbCommand dbCommand)
             {
                 dbCommand.CommandText =
-                    $"select " +
+                    $"select distinct" +
                     $"	svp_schueler_stamm.id as schueler_id, " +
                     $"	svp_unterrichtselement.klassengruppe_id as klassengruppe_id, " +
                     $"  svp_klassengruppe.klasse_id as klasse_id, " +
@@ -252,7 +252,8 @@ namespace Enbrea.Edoosys.Db
                     $"left join asv.svp_lehrer_schuljahr lsj on lsj.Id = svp_lehrer_schuljahr_schule.lehrer_schuljahr_id " +
                     $"left join asv.svp_lehrer_stamm on svp_lehrer_stamm.Id = lsj.lehrer_stamm_id " +
                     $"where svp_wl_schuljahr.kurzform = @schoolYearCode and svp_schule_stamm.schulnummer = @schoolNo and " +
-                    $"((not @activeStudentsOnly) or (svp_schueler_stamm.austrittsdatum is null)) and svp_besuchtes_fach.schulverzeichnis_id is null";
+                    $"(not svp_fachgruppe.schuelerfach_id is null) and (svp_besuchtes_fach.schulverzeichnis_id is null) and " +
+                    $"((not @activeStudentsOnly) or (svp_schueler_stamm.austrittsdatum is null))";
 
                 var dbParameter1 = dbCommand.CreateParameter();
                 dbParameter1.ParameterName = "schoolNo";
