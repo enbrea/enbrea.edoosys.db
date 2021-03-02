@@ -1,8 +1,8 @@
-﻿#region ENBREA - Copyright (C) 2020 STÜBER SYSTEMS GmbH
+﻿#region ENBREA - Copyright (C) 2021 STÜBER SYSTEMS GmbH
 /*    
  *    ENBREA
  *    
- *    Copyright (C) 2020 STÜBER SYSTEMS GmbH
+ *    Copyright (C) 2021 STÜBER SYSTEMS GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU Affero General Public License, version 3,
@@ -25,7 +25,7 @@ using System.Data.Common;
 namespace Enbrea.Edoosys.Db
 {
     /// <summary>
-    /// An entity within the edoo.sys database table "asv.svp_klassengruppe"
+    /// An entity within the edoo.sys database table "asv.svp_klassengruppe" (+joined tables)
     /// </summary>
     public class SchoolClass
     {

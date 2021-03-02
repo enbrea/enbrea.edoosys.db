@@ -1,8 +1,8 @@
-﻿#region ENBREA - Copyright (C) 2020 STÜBER SYSTEMS GmbH
+﻿#region ENBREA - Copyright (C) 2021 STÜBER SYSTEMS GmbH
 /*    
  *    ENBREA
  *    
- *    Copyright (C) 2020 STÜBER SYSTEMS GmbH
+ *    Copyright (C) 2021 STÜBER SYSTEMS GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU Affero General Public License, version 3,
@@ -120,8 +120,9 @@ namespace Enbrea.Edoosys.Db
         /// </summary>
         /// <param name="schoolNo">Official school number</param>
         /// <param name="schoolYearCode">School Year shortname</param>
+        /// <param name="activeStudentsOnly">Select only active students</param>
         /// <returns>An async enumerator of students</returns>
-        public async IAsyncEnumerable<Student> StudentsAsync(string schoolNo, string schoolYearCode)
+        public async IAsyncEnumerable<Student> StudentsAsync(string schoolNo, string schoolYearCode, bool activeStudentsOnly)
         {
             await foreach (var entity in EntitiesAsync(command => SetQuery(command), reader => Student.FromDb(reader)))
             {
@@ -131,7 +132,7 @@ namespace Enbrea.Edoosys.Db
             void SetQuery(DbCommand dbCommand)
             {
                 dbCommand.CommandText =
-                    $"select " +
+                    $"select distinct" +
                     $"  svp_schueler_stamm.id, " +
                     $"  svp_schueler_stamm.familienname, " +
                     $"  svp_schueler_stamm.vornamen, " +
@@ -139,6 +140,8 @@ namespace Enbrea.Edoosys.Db
                     $"  svp_schueler_stamm.rufname, " +
                     $"  svp_schueler_stamm.namensbestandteil_vorangest, " +
                     $" 	svp_schueler_stamm.namensbestandteil_nachgest, " +
+                    $"  svp_schueler_stamm.eintrittsdatum, " +
+                    $"  svp_schueler_stamm.austrittsdatum, " +
                     $"  svp_wl_wert.schluessel as geschlecht " +
                     $"from asv.svp_schueler_schuljahr " +
                     $"join asv.svp_schueler_stamm on svp_schueler_stamm.id = svp_schueler_schuljahr.schueler_stamm_id " +
@@ -146,7 +149,8 @@ namespace Enbrea.Edoosys.Db
                     $"join asv.svp_schule_stamm on svp_schule_stamm.id = svp_schule_schuljahr.schule_stamm_id " +
                     $"join asv.svp_wl_schuljahr on svp_wl_schuljahr.id = svp_schule_schuljahr.schuljahr_id " +
                     $"left join asv.svp_wl_wert on svp_wl_wert.id = svp_schueler_stamm.wl_geschlecht_id " +
-                    $"where svp_wl_schuljahr.kurzform = @schoolYearCode and svp_schule_stamm.schulnummer = @schoolNo";
+                    $"where svp_wl_schuljahr.kurzform = @schoolYearCode and svp_schule_stamm.schulnummer = @schoolNo and " +
+                    $"((not @activeStudentsOnly) or (svp_schueler_stamm.austrittsdatum is null))";
 
                 var dbParameter1 = dbCommand.CreateParameter();
                 dbParameter1.ParameterName = "schoolNo";
@@ -154,9 +158,13 @@ namespace Enbrea.Edoosys.Db
                 var dbParameter2 = dbCommand.CreateParameter();
                 dbParameter2.ParameterName = "schoolYearCode";
                 dbParameter2.Value = schoolYearCode;
+                var dbParameter3 = dbCommand.CreateParameter();
+                dbParameter3.ParameterName = "activeStudentsOnly";
+                dbParameter3.Value = activeStudentsOnly;
 
                 dbCommand.Parameters.Add(dbParameter1);
                 dbCommand.Parameters.Add(dbParameter2);
+                dbCommand.Parameters.Add(dbParameter3);
             }
         }
 
@@ -165,8 +173,9 @@ namespace Enbrea.Edoosys.Db
         /// </summary>
         /// <param name="schoolNo">Official school number</param>
         /// <param name="schoolYearCode">School Year shortname</param>
+        /// <param name="activeStudentsOnly">Select only active students</param>
         /// <returns>An async enumerator of school class attendances</returns>
-        public async IAsyncEnumerable<StudentSchoolClassAttendance> StudentSchoolClassAttendancesAsync(string schoolNo, string schoolYearCode)
+        public async IAsyncEnumerable<StudentSchoolClassAttendance> StudentSchoolClassAttendancesAsync(string schoolNo, string schoolYearCode, bool activeStudentsOnly)
         {
             await foreach (var entity in EntitiesAsync(command => SetQuery(command), reader => StudentSchoolClassAttendance.FromDb(reader)))
             {
@@ -176,7 +185,7 @@ namespace Enbrea.Edoosys.Db
             void SetQuery(DbCommand dbCommand)
             {
                 dbCommand.CommandText =
-                    $"select " +
+                    $"select distinct" +
                     $"  svp_schueler_stamm.id as schueler_id, " +
                     $"  svp_schueler_schuljahr.klassengruppe_id as klassengruppe_id, " +
                     $"  svp_klassengruppe.klasse_id " +
@@ -186,7 +195,8 @@ namespace Enbrea.Edoosys.Db
                     $"join asv.svp_schule_schuljahr on svp_schule_schuljahr.schuljahr_id = svp_schueler_schuljahr.schuljahr_id " +
                     $"join asv.svp_schule_stamm on svp_schule_stamm.id = svp_schule_schuljahr.schule_stamm_id " +
                     $"join asv.svp_wl_schuljahr on svp_wl_schuljahr.id = svp_schule_schuljahr.schuljahr_id " +
-                    $"where svp_wl_schuljahr.kurzform = @schoolYearCode and svp_schule_stamm.schulnummer = @schoolNo";
+                    $"where svp_wl_schuljahr.kurzform = @schoolYearCode and svp_schule_stamm.schulnummer = @schoolNo and " +
+                    $"((not @activeStudentsOnly) or (svp_schueler_stamm.austrittsdatum is null))";
 
                 var dbParameter1 = dbCommand.CreateParameter();
                 dbParameter1.ParameterName = "schoolNo";
@@ -194,9 +204,13 @@ namespace Enbrea.Edoosys.Db
                 var dbParameter2 = dbCommand.CreateParameter();
                 dbParameter2.ParameterName = "schoolYearCode";
                 dbParameter2.Value = schoolYearCode;
+                var dbParameter3 = dbCommand.CreateParameter();
+                dbParameter3.ParameterName = "activeStudentsOnly";
+                dbParameter3.Value = activeStudentsOnly;
 
                 dbCommand.Parameters.Add(dbParameter1);
                 dbCommand.Parameters.Add(dbParameter2);
+                dbCommand.Parameters.Add(dbParameter3);
             }
         }
 
@@ -205,8 +219,9 @@ namespace Enbrea.Edoosys.Db
         /// </summary>
         /// <param name="schoolNo">Official school number</param>
         /// <param name="schoolYearCode">School Year shortname</param>
+        /// <param name="activeStudentsOnly">Select only active students</param>
         /// <returns>An async enumerator of subjects</returns>
-        public async IAsyncEnumerable<StudentSubject> StudentSubjectsAsync(string schoolNo, string schoolYearCode)
+        public async IAsyncEnumerable<StudentSubject> StudentSubjectsAsync(string schoolNo, string schoolYearCode, bool activeStudentsOnly)
         {
             await foreach (var entity in EntitiesAsync(command => SetQuery(command), reader => StudentSubject.FromDb(reader)))
             {
@@ -216,7 +231,7 @@ namespace Enbrea.Edoosys.Db
             void SetQuery(DbCommand dbCommand)
             {
                 dbCommand.CommandText =
-                    $"select " +
+                    $"select distinct" +
                     $"	svp_schueler_stamm.id as schueler_id, " +
                     $"	svp_unterrichtselement.klassengruppe_id as klassengruppe_id, " +
                     $"  svp_klassengruppe.klasse_id as klasse_id, " +
@@ -236,7 +251,9 @@ namespace Enbrea.Edoosys.Db
                     $"left join asv.svp_lehrer_schuljahr_schule on svp_lehrer_schuljahr_schule.id = svp_unterrichtselement.lehrer_schuljahr_schule_id " +
                     $"left join asv.svp_lehrer_schuljahr lsj on lsj.Id = svp_lehrer_schuljahr_schule.lehrer_schuljahr_id " +
                     $"left join asv.svp_lehrer_stamm on svp_lehrer_stamm.Id = lsj.lehrer_stamm_id " +
-                    $"where svp_wl_schuljahr.kurzform = @schoolYearCode and svp_schule_stamm.schulnummer = @schoolNo and svp_besuchtes_fach.schulverzeichnis_id is null";
+                    $"where svp_wl_schuljahr.kurzform = @schoolYearCode and svp_schule_stamm.schulnummer = @schoolNo and " +
+                    $"(not svp_fachgruppe.schuelerfach_id is null) and (svp_besuchtes_fach.schulverzeichnis_id is null) and " +
+                    $"((not @activeStudentsOnly) or (svp_schueler_stamm.austrittsdatum is null))";
 
                 var dbParameter1 = dbCommand.CreateParameter();
                 dbParameter1.ParameterName = "schoolNo";
@@ -244,9 +261,13 @@ namespace Enbrea.Edoosys.Db
                 var dbParameter2 = dbCommand.CreateParameter();
                 dbParameter2.ParameterName = "schoolYearCode";
                 dbParameter2.Value = schoolYearCode;
+                var dbParameter3 = dbCommand.CreateParameter();
+                dbParameter3.ParameterName = "activeStudentsOnly";
+                dbParameter3.Value = activeStudentsOnly;
 
                 dbCommand.Parameters.Add(dbParameter1);
                 dbCommand.Parameters.Add(dbParameter2);
+                dbCommand.Parameters.Add(dbParameter3);
             }
         }
 
@@ -315,14 +336,18 @@ namespace Enbrea.Edoosys.Db
                     $"  svp_lehrer_stamm.rufname, " +
                     $"  svp_lehrer_stamm.namensbestandteil_vorangest, " +
                     $" 	svp_lehrer_stamm.namensbestandteil_nachgest, " +
-                    $"  svp_wl_wert.schluessel as geschlecht " +
+                    $"  svp_lehrer_schuljahr.zugang_datum, " +
+                    $"  svp_lehrer_schuljahr.abgang_datum, " +
+                    $"  wl1.schluessel as geschlecht, " +
+                    $"  wl2.schluessel as lehrerart " +
                     $"from asv.svp_lehrer_stamm " +
                     $"join asv.svp_lehrer_schuljahr on svp_lehrer_schuljahr.lehrer_stamm_id = asv.svp_lehrer_stamm.id " +
                     $"join asv.svp_lehrer_schuljahr_schule on svp_lehrer_schuljahr.Id = svp_lehrer_schuljahr_schule.lehrer_schuljahr_id " +
                     $"join asv.svp_schule_schuljahr on svp_schule_schuljahr.id = svp_lehrer_schuljahr_schule.schule_schuljahr_id " +
                     $"join asv.svp_schule_stamm on svp_schule_stamm.id = svp_schule_schuljahr.schule_stamm_id " +
                     $"join asv.svp_wl_schuljahr on svp_wl_schuljahr.id = svp_schule_schuljahr.schuljahr_id " +
-                    $"left join asv.svp_wl_wert on svp_wl_wert.id = svp_lehrer_stamm.wl_geschlecht_id " +
+                    $"left join asv.svp_wl_wert as wl1 on wl1.id = svp_lehrer_stamm.wl_geschlecht_id " +
+                    $"left join asv.svp_wl_wert as wl2 on wl2.id = svp_lehrer_stamm.wl_lehrerart_id " +
                     $"where svp_wl_schuljahr.kurzform = @schoolYearCode and svp_schule_stamm.schulnummer = @schoolNo";
 
                 var dbParameter1 = dbCommand.CreateParameter();
