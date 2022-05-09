@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'windows-2019'
+  vmImage: 'windows-2022'
 
 variables:
 - group: 'nuget-package-config'
@@ -26,16 +26,10 @@ steps:
     InformationalVersion: '$(SemVersion)'
     LogLevel: 'verbose'
     FailOnWarning: false
-- task: UseDotNet@2
-  displayName: 'Install .NET Core SDK'
-  inputs:
-    packageType: sdk
-    version: 3.x
-    installationPath: $(Agent.ToolsDirectory)/dotnet
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet Client'
   inputs:
-    versionSpec: '5.5.1'
+    versionSpec: '6.x'
 - task: DotNetCoreCLI@2
   displayName: 'Restore'
   inputs:
@@ -88,7 +82,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      git remote add github https://$(PAT)@github.com/stuebersystems/enbrea.edoosys.db.git
+      git remote add github https://$(PAT)@github.com/enbrea/enbrea.edoosys.db.git
       git fetch github
       git checkout .
       git push github HEAD:main

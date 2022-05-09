@@ -1,5 +1,5 @@
 [![NuGet Gallery](https://img.shields.io/badge/NuGet%20Gallery-enbrea.edoosys.db-blue.svg)](https://www.nuget.org/packages/Enbrea.Edoosys.Db/)
-![GitHub](https://img.shields.io/github/license/stuebersystems/enbrea.edoosys.db)
+![GitHub](https://img.shields.io/github/license/enbrea/enbrea.edoosys.db)
 
 # ENBREA EDOOSYS.DB
 
@@ -17,7 +17,7 @@ edoo.sys speichert Daten in einer PostgreSQL-Datenbank. ENBREA EDOOSYS.DB greift
 
 ## Dokumentation
 
-Die Dokumentation dieser Bibliothek findest Du im [GitHub-Wiki](https://github.com/stuebersystems/enbrea.edoosys.db/wiki).
+Die Dokumentation dieser Bibliothek findest Du im [GitHub-Wiki](https://github.com/enbrea/enbrea.edoosys.db/wiki).
 
 ## Kann ich mithelfen?
 
