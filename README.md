@@ -22,7 +22,3 @@ Die Dokumentation dieser Bibliothek findest Du im [GitHub-Wiki](https://github.c
 ## Kann ich mithelfen?
 
 Ja, sehr gerne. Der beste Weg mitzuhelfen ist es, Rückmeldung per Issue-Tracker zu geben und/oder Korrekturen per Pull-Request zu übermitteln.
-
-## Code of conduct (Verhaltensregeln)
-
-In diesem Projekt wurde der [STÜBER SYSTEMS Code of conduct](https://www.stueber.de/code-of-conduct.php) übernommen.
