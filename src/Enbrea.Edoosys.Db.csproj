@@ -14,7 +14,7 @@
     <Version>0.4.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/Enbrea/Enbrea.edoosys.db</RepositoryUrl>
+    <RepositoryUrl>https://github.com/enbrea/enbrea.edoosys.db</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

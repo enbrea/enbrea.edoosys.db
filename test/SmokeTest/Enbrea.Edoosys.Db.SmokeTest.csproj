@@ -6,7 +6,7 @@
     <Company>STÜBER SYSTEMS GmbH</Company>
     <Copyright>© 2024 STÜBER SYSTEMS GmbH</Copyright>
     <Product>Enbrea Edoosys.DB</Product>
-    <Description>Smoke test for Enbrea EDOOSYS.DB</Description>
+    <Description>Smoke test for Enbrea Edoosys.DB</Description>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
