@@ -5,7 +5,7 @@
     <Authors>STÜBER SYSTEMS GmbH</Authors>
     <Company>STÜBER SYSTEMS GmbH</Company>
     <Copyright>© 2024 STÜBER SYSTEMS GmbH</Copyright>
-    <Product>Enbrea EDOOSYS.DB</Product>
+    <Product>Enbrea Edoosys.DB</Product>
     <Description>Smoke test for Enbrea EDOOSYS.DB</Description>
     <OutputType>Exe</OutputType>
   </PropertyGroup>

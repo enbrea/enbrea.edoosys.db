@@ -6,7 +6,7 @@
     <Authors>STÜBER SYSTEMS GmbH</Authors>
     <Company>STÜBER SYSTEMS GmbH</Company>
     <Copyright>© 2023 STÜBER SYSTEMS GmbH</Copyright>
-    <Product>Enbrea EDOOSYS.DB</Product>
+    <Product>Enbrea Edoosys.DB</Product>
     <Description>Reader class for the edoo.sys RLP database</Description>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType />
