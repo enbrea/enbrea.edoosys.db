@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>STÜBER SYSTEMS GmbH</Authors>
     <Company>STÜBER SYSTEMS GmbH</Company>
     <Copyright>© 2023 STÜBER SYSTEMS GmbH</Copyright>
-    <Product>ENBREA EDOOSYS.DB</Product>
+    <Product>Enbrea EDOOSYS.DB</Product>
     <Description>Reader class for the edoo.sys RLP database</Description>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType />
     <NeutralLanguage></NeutralLanguage>
-    <Version>0.2.0</Version>
+    <Version>0.4.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <RepositoryUrl>https://github.com/enbrea/enbrea.edoosys.db</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Enbrea/Enbrea.edoosys.db</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql" Version="7.0.6" />
+    <PackageReference Include="Npgsql" Version="9.0.1" />
   </ItemGroup>
 
 </Project>

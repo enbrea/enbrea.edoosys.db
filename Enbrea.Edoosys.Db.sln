@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8DAB1221-B8BE-4B81-A6B6-9EC966A25006}") = "Enbrea.Edoosys.Db", "src\Enbrea.Edoosys.Db.csproj", "{76851181-238D-46A4-A720-754453EF72DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enbrea.Edoosys.Db", "src\Enbrea.Edoosys.Db.csproj", "{76851181-238D-46A4-A720-754453EF72DC}"
 EndProject
-Project("{316CA033-F949-4D16-B143-22EAACFDE46E}") = "Enbrea.Edoosys.Db.SmokeTest", "test\SmokeTest\Enbrea.Edoosys.Db.SmokeTest.csproj", "{F63C3664-240B-4EE2-9FB3-0B58BA5AFDDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enbrea.Edoosys.Db.SmokeTest", "test\SmokeTest\Enbrea.Edoosys.Db.SmokeTest.csproj", "{F63C3664-240B-4EE2-9FB3-0B58BA5AFDDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77D6DD88-DC86-418D-AE9C-0EFF8586EB33}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
