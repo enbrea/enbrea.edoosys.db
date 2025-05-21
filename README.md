@@ -1,7 +1,7 @@
 [![NuGet Gallery](https://img.shields.io/badge/NuGet%20Gallery-enbrea.edoosys.db-blue.svg)](https://www.nuget.org/packages/Enbrea.Edoosys.Db/)
 ![GitHub](https://img.shields.io/github/license/enbrea/enbrea.edoosys.db)
 
-# ENBREA EDOOSYS.DB
+# Enbrea Edoosys.DB
 
 Eine .NET-Bibliothek zum direkten Lesen von Daten aus einer edoo.sys-Datenbank. 
 
@@ -13,7 +13,7 @@ dotnet add package Enbrea.Edoosys.Db
 
 ## Systemvoraussetzungen
 
-edoo.sys speichert Daten in einer PostgreSQL-Datenbank. ENBREA EDOOSYS.DB greift direkt per ADO.NET auf die Datenbanktabellen zu. 
+edoo.sys speichert Daten in einer PostgreSQL-Datenbank. Enbrea Edoosys.DB greift direkt per ADO.NET auf die Datenbanktabellen zu. 
 
 ## Dokumentation
 
