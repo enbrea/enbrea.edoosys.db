@@ -5,6 +5,10 @@
 
 Eine .NET-Bibliothek zum direkten Lesen von Daten aus einer edoo.sys-Datenbank. 
 
++ Unterstützt .NET 10, .NET 9 und .NET 8.
++ Direkter Zugriff auf die PostgreSQL-Datenbank.
++ Low-Level-Reader zum Lesen von edoo.sys-Entitäten.
+
 ## Installation
 
 ```

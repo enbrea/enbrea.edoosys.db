@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="src/Enbrea.Edoosys.Db.csproj" />
+  <Project Path="test/SmokeTest/Enbrea.Edoosys.Db.SmokeTest.csproj" />
+</Solution>
