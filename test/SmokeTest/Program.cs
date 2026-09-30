@@ -22,22 +22,24 @@
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
-namespace Enbrea.Edoosys.Db.SmokeTest
+namespace Enbrea.Edoosys.Db.SmokeTest;
+
+/// <summary>
+/// The main program class for the smoke test application
+/// </summary>
+class Program
 {
-    class Program
+    static async Task Main()
     {
-        static async Task Main()
-        {
-            var Configuration = new ConfigurationBuilder()
-               .AddJsonFile("appsettings.json", optional: false)
-               .AddJsonFile("appsettings.Development.json", optional: true)
-               .Build();
+        var Configuration = new ConfigurationBuilder()
+           .AddJsonFile("appsettings.json", optional: false)
+           .AddJsonFile("appsettings.Development.json", optional: true)
+           .Build();
 
-            var appConfig = new AppConfig();
-            Configuration.Bind("AppConfig", appConfig);
+        var appConfig = new AppConfig();
+        Configuration.Bind("AppConfig", appConfig);
 
-            var appService = new AppService(appConfig);
-            await appService.StartAsync();
-        }
+        var appService = new AppService(appConfig);
+        await appService.StartAsync();
     }
 }

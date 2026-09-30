@@ -23,39 +23,38 @@
 using System;
 using System.Data.Common;
 
-namespace Enbrea.Edoosys.Db
-{
-    /// <summary>
-    /// An entity within the edoo.sys database table "asv.svp_schueler_stamm" (+joined tables)
-    /// </summary>
-    public class Student
-    {
-        public DateTime? Birthdate { get; set; }
-        public DateTime? EnrollmentDate { get; set; }
-        public string Firstname { get; set; }
-        public Gender? Gender { get; set; }
-        public string Id { get; set; }
-        public string Lastname { get; set; }
-        public DateTime? LeaveDate { get; set; }
-        public string NamePostfix { get; set; }
-        public string NamePrefix { get; set; }
-        public string Nickname { get; set; }
+namespace Enbrea.Edoosys.Db;
 
-        public static Student FromDb(DbDataReader reader)
+/// <summary>
+/// An entity within the edoo.sys database table "asv.svp_schueler_stamm" (+joined tables)
+/// </summary>
+public class Student
+{
+    public DateOnly? Birthdate { get; set; }
+    public DateOnly? EnrollmentDate { get; set; }
+    public string Firstname { get; set; }
+    public Gender? Gender { get; set; }
+    public string Id { get; set; }
+    public string Lastname { get; set; }
+    public DateOnly? LeaveDate { get; set; }
+    public string NamePostfix { get; set; }
+    public string NamePrefix { get; set; }
+    public string Nickname { get; set; }
+
+    public static Student FromDb(DbDataReader reader)
+    {
+        return new Student
         {
-            return new Student
-            {
-                Id = reader.GetValue<string>("id"),
-                Lastname = reader.GetValue<string>("familienname"),
-                Firstname = reader.GetValue<string>("vornamen"),
-                Birthdate = reader.GetValue<DateTime?>("geburtsdatum"),
-                Gender = reader.GetGenderValue("geschlecht"),
-                Nickname = reader.GetValue<string>("rufname"),
-                NamePrefix = reader.GetValue<string>("namensbestandteil_vorangest"),
-                NamePostfix = reader.GetValue<string>("namensbestandteil_nachgest"),
-                EnrollmentDate = reader.GetValue<DateTime?>("eintrittsdatum"),
-                LeaveDate = reader.GetValue<DateTime?>("austrittsdatum")
-            };
-        }
+            Id = reader.GetValue<string>("id"),
+            Lastname = reader.GetValue<string>("familienname"),
+            Firstname = reader.GetValue<string>("vornamen"),
+            Birthdate = reader.GetValue<DateOnly?>("geburtsdatum"),
+            Gender = reader.GetGenderValue("geschlecht"),
+            Nickname = reader.GetValue<string>("rufname"),
+            NamePrefix = reader.GetValue<string>("namensbestandteil_vorangest"),
+            NamePostfix = reader.GetValue<string>("namensbestandteil_nachgest"),
+            EnrollmentDate = reader.GetValue<DateOnly?>("eintrittsdatum"),
+            LeaveDate = reader.GetValue<DateOnly?>("austrittsdatum")
+        };
     }
 }

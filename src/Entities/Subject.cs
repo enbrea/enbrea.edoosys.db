@@ -21,27 +21,26 @@
 	
 using System.Data.Common;
 
-namespace Enbrea.Edoosys.Db
-{
-    /// <summary>
-    /// An entity within the edoo.sys database table "asv.svp_schuelerfach"
-    /// </summary>
-    public class Subject
-    {
-        public string Code { get; set; }
-        public string DisplayName { get; set; }
-        public string Id { get; set; }
-        public string Name { get; set; }
+namespace Enbrea.Edoosys.Db;
 
-        public static Subject FromDb(DbDataReader reader)
+/// <summary>
+/// An entity within the edoo.sys database table "asv.svp_schuelerfach"
+/// </summary>
+public class Subject
+{
+    public string Code { get; set; }
+    public string DisplayName { get; set; }
+    public string Id { get; set; }
+    public string Name { get; set; }
+
+    public static Subject FromDb(DbDataReader reader)
+    {
+        return new Subject
         {
-            return new Subject
-            {
-                Id = reader.GetValue<string>("id"),
-                Code = reader.GetValue<string>("kurzform"),
-                Name = reader.GetValue<string>("langform"),
-                DisplayName = reader.GetValue<string>("anzeigeform")
-            };
-        }
+            Id = reader.GetValue<string>("id"),
+            Code = reader.GetValue<string>("kurzform"),
+            Name = reader.GetValue<string>("langform"),
+            DisplayName = reader.GetValue<string>("anzeigeform")
+        };
     }
 }

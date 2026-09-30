@@ -19,28 +19,26 @@
  */
 #endregion
 
-using System;
 using System.Data.Common;
 
-namespace Enbrea.Edoosys.Db
-{
-    /// <summary>
-    /// An entity within the edoo.sys database table "asv.svp_schueler_schuljahr" (+joined tables)
-    /// </summary>
-    public class StudentSchoolClassAttendance
-    {
-        public string SchoolClassId { get; set; }
-        public string SchoolClassRootId { get; set; }
-        public string StudentId { get; set; }
+namespace Enbrea.Edoosys.Db;
 
-        public static StudentSchoolClassAttendance FromDb(DbDataReader reader)
+/// <summary>
+/// An entity within the edoo.sys database table "asv.svp_schueler_schuljahr" (+joined tables)
+/// </summary>
+public class StudentSchoolClassAttendance
+{
+    public string SchoolClassId { get; set; }
+    public string SchoolClassRootId { get; set; }
+    public string StudentId { get; set; }
+
+    public static StudentSchoolClassAttendance FromDb(DbDataReader reader)
+    {
+        return new StudentSchoolClassAttendance
         {
-            return new StudentSchoolClassAttendance
-            {
-                SchoolClassId = reader.GetValue<string>("klassengruppe_id"),
-                SchoolClassRootId = reader.GetValue<string>("klasse_id"),
-                StudentId = reader.GetValue<string>("schueler_id")
-            };
-        }
+            SchoolClassId = reader.GetValue<string>("klassengruppe_id"),
+            SchoolClassRootId = reader.GetValue<string>("klasse_id"),
+            StudentId = reader.GetValue<string>("schueler_id")
+        };
     }
 }

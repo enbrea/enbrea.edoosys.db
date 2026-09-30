@@ -22,43 +22,42 @@
 using System;
 using System.Data.Common;
 
-namespace Enbrea.Edoosys.Db
-{
-    /// <summary>
-    /// An entity within the edoo.sys database table "asv.svp_lehrer_stamm" (+joined tables)
-    /// </summary>
-    public class Teacher
-    {
-        public DateTime? Birthdate { get; set; }
-        public string Code { get; set; }
-        public string Firstname { get; set; }
-        public Gender? Gender { get; set; }
-        public string Id { get; set; }
-        public string Lastname { get; set; }
-        public DateTime? LeaveDate { get; set; }
-        public string NamePostfix { get; set; }
-        public string NamePrefix { get; set; }
-        public string Nickname { get; set; }
-        public DateTime? StartDate { get; set; }
-        public string TeacherType { get; set; }
+namespace Enbrea.Edoosys.Db;
 
-        public static Teacher FromDb(DbDataReader reader)
+/// <summary>
+/// An entity within the edoo.sys database table "asv.svp_lehrer_stamm" (+joined tables)
+/// </summary>
+public class Teacher
+{
+    public DateOnly? Birthdate { get; set; }
+    public string Code { get; set; }
+    public string Firstname { get; set; }
+    public Gender? Gender { get; set; }
+    public string Id { get; set; }
+    public string Lastname { get; set; }
+    public DateOnly? LeaveDate { get; set; }
+    public string NamePostfix { get; set; }
+    public string NamePrefix { get; set; }
+    public string Nickname { get; set; }
+    public DateOnly? StartDate { get; set; }
+    public string TeacherType { get; set; }
+
+    public static Teacher FromDb(DbDataReader reader)
+    {
+        return new Teacher
         {
-            return new Teacher
-            {
-                Id = reader.GetValue<string>("id"),
-                Code = reader.GetValue<string>("namenskuerzel"),
-                Lastname = reader.GetValue<string>("familienname"),
-                Firstname = reader.GetValue<string>("vornamen"),
-                Birthdate = reader.GetValue<DateTime?>("geburtsdatum"),
-                Nickname = reader.GetValue<string>("rufname"),
-                NamePrefix = reader.GetValue<string>("namensbestandteil_vorangest"),
-                NamePostfix = reader.GetValue<string>("namensbestandteil_nachgest"),
-                Gender = reader.GetGenderValue("geschlecht"),
-                TeacherType = reader.GetValue<string>("lehrerart"),
-                StartDate = reader.GetValue<DateTime?>("zugang_datum"),
-                LeaveDate = reader.GetValue<DateTime?>("abgang_datum")
-            };
-        }
+            Id = reader.GetValue<string>("id"),
+            Code = reader.GetValue<string>("namenskuerzel"),
+            Lastname = reader.GetValue<string>("familienname"),
+            Firstname = reader.GetValue<string>("vornamen"),
+            Birthdate = reader.GetValue<DateOnly?>("geburtsdatum"),
+            Nickname = reader.GetValue<string>("rufname"),
+            NamePrefix = reader.GetValue<string>("namensbestandteil_vorangest"),
+            NamePostfix = reader.GetValue<string>("namensbestandteil_nachgest"),
+            Gender = reader.GetGenderValue("geschlecht"),
+            TeacherType = reader.GetValue<string>("lehrerart"),
+            StartDate = reader.GetValue<DateOnly?>("zugang_datum"),
+            LeaveDate = reader.GetValue<DateOnly?>("abgang_datum")
+        };
     }
 }

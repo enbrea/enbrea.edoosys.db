@@ -22,31 +22,30 @@
 using System;
 using System.Data.Common;
 
-namespace Enbrea.Edoosys.Db
-{
-    /// <summary>
-    /// An entity within the edoo.sys database table "asv.svp_wl_schuljahr"
-    /// </summary>
-    public class SchoolYear
-    {
-        public string Code { get; set; }
-        public string DisplayName { get; set; }
-        public DateTime EndDate { get; set; }
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public DateTime StartDate { get; set; }
+namespace Enbrea.Edoosys.Db;
 
-        public static SchoolYear FromDb(DbDataReader reader)
+/// <summary>
+/// An entity within the edoo.sys database table "asv.svp_wl_schuljahr"
+/// </summary>
+public class SchoolYear
+{
+    public string Code { get; set; }
+    public string DisplayName { get; set; }
+    public DateOnly EndDate { get; set; }
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public DateOnly StartDate { get; set; }
+
+    public static SchoolYear FromDb(DbDataReader reader)
+    {
+        return new SchoolYear
         {
-            return new SchoolYear
-            {
-                Id = reader.GetValue<string>("id"),
-                Code = reader.GetValue<string>("kurzform"),
-                Name = reader.GetValue<string>("langform"),
-                DisplayName = reader.GetValue<string>("anzeigeform"),
-                StartDate = reader.GetValue<DateTime>("beginn"),
-                EndDate = reader.GetValue<DateTime>("ende")
-            };
-        }
+            Id = reader.GetValue<string>("id"),
+            Code = reader.GetValue<string>("kurzform"),
+            Name = reader.GetValue<string>("langform"),
+            DisplayName = reader.GetValue<string>("anzeigeform"),
+            StartDate = reader.GetValue<DateOnly>("beginn"),
+            EndDate = reader.GetValue<DateOnly>("ende")
+        };
     }
 }

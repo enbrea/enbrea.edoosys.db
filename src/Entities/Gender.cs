@@ -19,16 +19,15 @@
  */
 #endregion
 
-namespace Enbrea.Edoosys.Db
+namespace Enbrea.Edoosys.Db;
+
+/// <summary>
+/// Gender enumeration 
+/// </summary>
+public enum Gender
 {
-    /// <summary>
-    /// Gender enumeration 
-    /// </summary>
-    public enum Gender
-    {
-        Male,
-        Female,
-        Diverse,
-        Unknown
-    }
+    Male,
+    Female,
+    Diverse,
+    Unknown
 }

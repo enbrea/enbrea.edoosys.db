@@ -21,27 +21,26 @@
 
 using System.Data.Common;
 
-namespace Enbrea.Edoosys.Db
-{
-    /// <summary>
-    /// An entity within the edoo.sys database table "asv.svp_schule_stamm"
-    /// </summary>
-    public class Tenant
-    {
-        public string Code { get; set; }
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string SchoolNo { get; set; }
+namespace Enbrea.Edoosys.Db;
 
-        public static Tenant FromDb(DbDataReader reader)
+/// <summary>
+/// An entity within the edoo.sys database table "asv.svp_schule_stamm"
+/// </summary>
+public class Tenant
+{
+    public string Code { get; set; }
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public string SchoolNo { get; set; }
+
+    public static Tenant FromDb(DbDataReader reader)
+    {
+        return new Tenant
         {
-            return new Tenant
-            {
-                Id = reader.GetValue<string>("id"),
-                Code = reader.GetValue<string>("kurzname"),
-                SchoolNo = reader.GetValue<string>("schulnummer"),
-                Name = reader.GetValue<string>("dienststellenname")
-            };
-        }
+            Id = reader.GetValue<string>("id"),
+            Code = reader.GetValue<string>("kurzname"),
+            SchoolNo = reader.GetValue<string>("schulnummer"),
+            Name = reader.GetValue<string>("dienststellenname")
+        };
     }
 }

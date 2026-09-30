@@ -19,12 +19,11 @@
  */
 #endregion
 
-namespace Enbrea.Edoosys.Db.SmokeTest
+namespace Enbrea.Edoosys.Db.SmokeTest;
+
+public class AppConfig
 {
-    public class AppConfig
-    {
-        public string DbConnection { get; set; }
-        public string SchoolNo { get; set; }
-        public string SchoolYearCode { get; set; }
-    }
+    public string DbConnection { get; set; }
+    public string SchoolNo { get; set; }
+    public string SchoolYearCode { get; set; }
 }

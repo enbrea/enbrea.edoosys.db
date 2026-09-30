@@ -19,32 +19,30 @@
  */
 #endregion
 
-using System;
 using System.Data.Common;
 
-namespace Enbrea.Edoosys.Db
-{
-    /// <summary>
-    /// An entity within the edoo.sys database table "asv.svp_unterrichtselement" (+joined tables)
-    /// </summary>
-    public class StudentSubject
-    {
-        public string SchoolClassId { get; set; }
-        public string SchoolClassRootId { get; set; }
-        public string StudentId { get; set; }
-        public string SubjectId { get; set; }
-        public string TeacherId { get; set; }
+namespace Enbrea.Edoosys.Db;
 
-        public static StudentSubject FromDb(DbDataReader reader)
+/// <summary>
+/// An entity within the edoo.sys database table "asv.svp_unterrichtselement" (+joined tables)
+/// </summary>
+public class StudentSubject
+{
+    public string SchoolClassId { get; set; }
+    public string SchoolClassRootId { get; set; }
+    public string StudentId { get; set; }
+    public string SubjectId { get; set; }
+    public string TeacherId { get; set; }
+
+    public static StudentSubject FromDb(DbDataReader reader)
+    {
+        return new StudentSubject
         {
-            return new StudentSubject
-            {
-                StudentId = reader.GetValue<string>("schueler_id"),
-                SchoolClassId = reader.GetValue<string>("klassengruppe_id"),
-                SchoolClassRootId = reader.GetValue<string>("klasse_id"),
-                SubjectId = reader.GetValue<string>("fach_id"),
-                TeacherId = reader.GetValue<string>("lehrer_id")
-            };
-        }
+            StudentId = reader.GetValue<string>("schueler_id"),
+            SchoolClassId = reader.GetValue<string>("klassengruppe_id"),
+            SchoolClassRootId = reader.GetValue<string>("klasse_id"),
+            SubjectId = reader.GetValue<string>("fach_id"),
+            TeacherId = reader.GetValue<string>("lehrer_id")
+        };
     }
 }

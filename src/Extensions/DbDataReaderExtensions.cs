@@ -22,61 +22,69 @@
 using System;
 using System.Data.Common;
 
-namespace Enbrea.Edoosys.Db
+namespace Enbrea.Edoosys.Db;
+
+/// <summary>
+/// Extensions for <see cref="DbDataReader"/>
+/// </summary>
+public static class DbDataReaderExtensions
 {
     /// <summary>
-    /// Extensions for <see cref="DbDataReader"/>
+    /// Gets the value of a column as <see cref="Gender"/> from a <see cref="DbDataReader"/>
     /// </summary>
-    public static class DbDataReaderExtensions
+    /// <param name="dbDataReader">The data reader</param>
+    /// <param name="name">The name of the column</param>
+    /// <returns>The value of the column as <see cref="Gender"/></returns>
+    public static Gender? GetGenderValue(this DbDataReader dbDataReader, string name)
     {
-        public static Gender? GetGenderValue(this DbDataReader dbDataReader, string name)
+        var value = GetValue<string>(dbDataReader, name);
+        
+        if (value != null)
         {
-            var value = GetValue<string>(dbDataReader, name);
-            
-            if (value != null)
+            return value switch
             {
-                return value switch
-                {
-                    "1" => Gender.Male,
-                    "2" => Gender.Female,
-                    "3" => Gender.Diverse,
-                    _ =>   Gender.Unknown
-                };
-            }
-            else
-            {
-                return null;
-            }
+                "1" => Gender.Male,
+                "2" => Gender.Female,
+                "3" => Gender.Diverse,
+                _ =>   Gender.Unknown
+            };
         }
-
-        public static TValue GetValue<TValue>(this DbDataReader dbDataReader, string name)
+        else
         {
-            var value = dbDataReader[name];
+            return null;
+        }
+    }
 
-            if (value != null)
+    /// <summary>
+    /// Gets the value of a column from a <see cref="DbDataReader"/>
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value to get</typeparam>
+    /// <param name="dbDataReader">The data reader</param>
+    /// <param name="name">The name of the column</param>
+    /// <returns>The value of the column</returns>
+    public static TValue GetValue<TValue>(this DbDataReader dbDataReader, string name)
+    {
+        var value = dbDataReader[name];
 
-            {
-                var t = value.GetType();
+        if (value != null)
 
-                if (t == typeof(DBNull))
-                {
-                    return default;
-                }
-                else
-                {
-                    var convertionType = Nullable.GetUnderlyingType(typeof(TValue));
-                    if (convertionType == null)
-                    {
-                        convertionType = typeof(TValue);
-                    }
-                    return (TValue)Convert.ChangeType(value, convertionType);
-                }
-            }
-            else
+        {
+            var t = value.GetType();
+
+            if (t == typeof(DBNull))
             {
                 return default;
             }
+            else
+            {
+                var convertionType = Nullable.GetUnderlyingType(typeof(TValue)) ?? typeof(TValue);
+                return (TValue)Convert.ChangeType(value, convertionType);
+            }
         }
-
+        else
+        {
+            return default;
+        }
     }
+
 }
